@@ -1,1 +1,56 @@
+def encrypt(text, shift):
+    result = ""
 
+    for char in text:
+        if char.isupper():
+            result += chr((ord(char) - 65 + shift) % 26 + 65)
+
+        elif char.islower():
+            result += chr((ord(char) - 97 + shift) % 26 + 97)
+
+        else:
+            result += char
+
+    return result
+
+
+def decrypt(text, shift):
+    result = ""
+
+    for char in text:
+        if char.isupper():
+            result += chr((ord(char) - 65 - shift) % 26 + 65)
+
+        elif char.islower():
+            result += chr((ord(char) - 97 - shift) % 26 + 97)
+
+        else:
+            result += char
+
+    return result
+
+
+print("=" * 45)
+print("      CAESAR CIPHER TOOL")
+print("=" * 45)
+
+print("1. Encrypt")
+print("2. Decrypt")
+
+choice = input("\nEnter Choice (1/2): ")
+
+message = input("Enter Message: ")
+shift = int(input("Enter Shift Key: "))
+
+if choice == "1":
+    encrypted = encrypt(message, shift)
+    print("\nEncrypted Message:")
+    print(encrypted)
+
+elif choice == "2":
+    decrypted = decrypt(message, shift)
+    print("\nDecrypted Message:")
+    print(decrypted)
+
+else:
+    print("Invalid Choice")
