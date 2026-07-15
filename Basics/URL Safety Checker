@@ -1,1 +1,68 @@
+from urllib.parse import urlparse
+import ipaddress
 
+print("=" * 50)
+print("          URL SAFETY CHECKER")
+print("=" * 50)
+
+url = input("Enter URL: ").strip()
+
+# Add https:// if missing
+if not url.startswith(("http://", "https://")):
+    url = "https://" + url
+
+parsed = urlparse(url)
+domain = parsed.netloc
+
+score = 0
+
+print("\nChecking URL...\n")
+
+# HTTPS Check
+if parsed.scheme == "https":
+    print("✅ HTTPS: Secure")
+    score += 1
+else:
+    print("❌ HTTPS: Not Secure")
+
+# IP Address Check
+try:
+    ipaddress.ip_address(domain)
+    print("❌ URL uses an IP Address")
+except ValueError:
+    print("✅ Domain Name Used")
+    score += 1
+
+# URL Length Check
+if len(url) < 75:
+    print("✅ URL Length: Normal")
+    score += 1
+else:
+    print("⚠ URL Length: Very Long")
+
+# @ Symbol Check
+if "@" in url:
+    print("❌ '@' Symbol Found")
+else:
+    print("✅ No '@' Symbol")
+    score += 1
+
+# Hyphen Check
+if "-" in domain:
+    print("⚠ Hyphen Found in Domain")
+else:
+    print("✅ Clean Domain")
+    score += 1
+
+print("\n" + "=" * 50)
+
+print(f"Safety Score: {score}/5")
+
+if score == 5:
+    print("🟢 Result: Looks Safe")
+elif score >= 3:
+    print("🟡 Result: Be Careful")
+else:
+    print("🔴 Result: Suspicious URL")
+
+print("=" * 50)
