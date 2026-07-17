@@ -1,1 +1,82 @@
+import os
+import hashlib
+import json
 
+FOLDER = "monitor_folder"
+HASH_FILE = "hashes.json"
+
+
+def calculate_hash(file_path):
+    sha256 = hashlib.sha256()
+
+    with open(file_path, "rb") as file:
+        while chunk := file.read(4096):
+            sha256.update(chunk)
+
+    return sha256.hexdigest()
+
+
+def scan_folder():
+    hashes = {}
+
+    if not os.path.exists(FOLDER):
+        os.makedirs(FOLDER)
+
+    for root, dirs, files in os.walk(FOLDER):
+
+        for file in files:
+
+            path = os.path.join(root, file)
+
+            try:
+                hashes[path] = calculate_hash(path)
+            except:
+                pass
+
+    return hashes
+
+
+def load_old_hashes():
+
+    if os.path.exists(HASH_FILE):
+        with open(HASH_FILE, "r") as file:
+            return json.load(file)
+
+    return {}
+
+
+def save_hashes(hashes):
+
+    with open(HASH_FILE, "w") as file:
+        json.dump(hashes, file, indent=4)
+
+
+def compare(old, new):
+
+    print("\n========== FILE INTEGRITY REPORT ==========\n")
+
+    # New Files
+    for file in new:
+        if file not in old:
+            print("[NEW]      ", file)
+
+    # Deleted Files
+    for file in old:
+        if file not in new:
+            print("[DELETED] ", file)
+
+    # Modified Files
+    for file in new:
+        if file in old:
+            if new[file] != old[file]:
+                print("[MODIFIED]", file)
+
+    print("\nScan Complete.")
+
+
+old_hashes = load_old_hashes()
+new_hashes = scan_folder()
+
+compare(old_hashes, new_hashes)
+
+save_hashes(new_hashes)
