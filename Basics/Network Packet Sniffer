@@ -1,1 +1,42 @@
+from scapy.all import sniff
+from scapy.layers.inet import IP, TCP, UDP, ICMP
 
+
+def packet_callback(packet):
+
+    if packet.haslayer(IP):
+
+        src = packet[IP].src
+        dst = packet[IP].dst
+
+        protocol = "Other"
+
+        if packet.haslayer(TCP):
+            protocol = "TCP"
+
+        elif packet.haslayer(UDP):
+            protocol = "UDP"
+
+        elif packet.haslayer(ICMP):
+            protocol = "ICMP"
+
+        print("=" * 60)
+        print("Source IP      :", src)
+        print("Destination IP :", dst)
+        print("Protocol       :", protocol)
+
+        if packet.haslayer(TCP):
+            print("Source Port    :", packet[TCP].sport)
+            print("Destination Port:", packet[TCP].dport)
+
+        elif packet.haslayer(UDP):
+            print("Source Port    :", packet[UDP].sport)
+            print("Destination Port:", packet[UDP].dport)
+
+        print("=" * 60)
+
+
+print("Starting Packet Sniffer...")
+print("Press CTRL+C to Stop\n")
+
+sniff(prn=packet_callback, store=False)
