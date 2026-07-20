@@ -1,1 +1,57 @@
+from collections import Counter
+import re
 
+LOG_FILE = "sample.log"
+REPORT_FILE = "report.txt"
+
+failed = 0
+success = 0
+ips = []
+
+with open(LOG_FILE, "r") as file:
+    lines = file.readlines()
+
+for line in lines:
+
+    if "Failed login" in line:
+        failed += 1
+
+    if "logged in successfully" in line:
+        success += 1
+
+    match = re.search(r"\d+\.\d+\.\d+\.\d+", line)
+
+    if match:
+        ips.append(match.group())
+
+counter = Counter(ips)
+
+print("=" * 50)
+print("SIEM LOG ANALYZER REPORT")
+print("=" * 50)
+
+print("Successful Logins :", success)
+print("Failed Logins     :", failed)
+
+print("\nSuspicious IP Addresses")
+
+for ip, count in counter.items():
+
+    if count >= 2:
+        print(f"{ip}  --> {count} events")
+
+with open(REPORT_FILE, "w") as report:
+
+    report.write("SIEM LOG ANALYZER REPORT\n")
+    report.write("=========================\n")
+    report.write(f"Successful Logins : {success}\n")
+    report.write(f"Failed Logins     : {failed}\n\n")
+
+    report.write("Suspicious IP Addresses\n")
+
+    for ip, count in counter.items():
+
+        if count >= 2:
+            report.write(f"{ip} --> {count} events\n")
+
+print("\nReport saved as report.txt")
