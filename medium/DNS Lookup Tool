@@ -1,1 +1,22 @@
+import dns.resolver
 
+print("=" * 50)
+print("          DNS LOOKUP TOOL")
+print("=" * 50)
+
+domain = input("Enter Domain: ")
+
+record_types = ["A", "AAAA", "MX", "NS", "CNAME"]
+
+for record in record_types:
+
+    print(f"\n{record} Records")
+
+    try:
+        answers = dns.resolver.resolve(domain, record)
+
+        for data in answers:
+            print(data)
+
+    except Exception:
+        print("No Record Found")
