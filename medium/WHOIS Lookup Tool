@@ -1,1 +1,23 @@
+import whois
 
+print("=" * 60)
+print("              WHOIS LOOKUP TOOL")
+print("=" * 60)
+
+domain = input("Enter Domain (example.com): ")
+
+try:
+    info = whois.whois(domain)
+
+    print("\n========== WHOIS INFORMATION ==========")
+    print("Domain Name     :", info.domain_name)
+    print("Registrar       :", info.registrar)
+    print("Creation Date   :", info.creation_date)
+    print("Updated Date    :", info.updated_date)
+    print("Expiration Date :", info.expiration_date)
+    print("Name Servers    :", info.name_servers)
+    print("WHOIS Server    :", info.whois_server)
+    print("Emails          :", info.emails)
+
+except Exception as e:
+    print("Error:", e)
