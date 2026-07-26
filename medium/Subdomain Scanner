@@ -1,1 +1,52 @@
+import socket
 
+print("=" * 60)
+print("          SUBDOMAIN SCANNER")
+print("=" * 60)
+
+domain = input("Enter Domain (example.com): ")
+
+subdomains = [
+    "www",
+    "mail",
+    "ftp",
+    "admin",
+    "api",
+    "dev",
+    "test",
+    "blog",
+    "shop",
+    "portal",
+    "login",
+    "vpn",
+    "docs"
+]
+
+found = []
+
+print("\nScanning...\n")
+
+for sub in subdomains:
+
+    host = f"{sub}.{domain}"
+
+    try:
+        ip = socket.gethostbyname(host)
+        print(f"[FOUND] {host} --> {ip}")
+        found.append(f"{host} --> {ip}")
+
+    except socket.gaierror:
+        pass
+
+print("\nScan Completed.")
+
+if found:
+    with open("results.txt", "w") as file:
+        for item in found:
+            file.write(item + "\n")
+
+    print(f"\nTotal Found: {len(found)}")
+    print("Results saved in results.txt")
+
+else:
+    print("No Active Subdomains Found.")
