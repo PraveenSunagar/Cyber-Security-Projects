@@ -1,1 +1,48 @@
+import requests
 
+print("=" * 60)
+print("      DIRECTORY & FILE DISCOVERY SCANNER")
+print("=" * 60)
+
+base_url = input("Enter Website URL (https://example.com): ").rstrip("/")
+
+paths = [
+    "admin",
+    "login",
+    "dashboard",
+    "uploads",
+    "backup",
+    "images",
+    "css",
+    "js",
+    "robots.txt",
+    "sitemap.xml",
+    ".git",
+    ".env"
+]
+
+results = []
+
+print("\nScanning...\n")
+
+for path in paths:
+
+    url = f"{base_url}/{path}"
+
+    try:
+        response = requests.get(url, timeout=5)
+
+        if response.status_code != 404:
+            print(f"[{response.status_code}] {url}")
+            results.append(f"{response.status_code} - {url}")
+
+    except requests.exceptions.RequestException:
+        print(f"[ERROR] {url}")
+
+with open("results.txt", "w") as file:
+    for item in results:
+        file.write(item + "\n")
+
+print("\nScan Completed!")
+print(f"Found {len(results)} accessible paths.")
+print("Results saved to results.txt")
