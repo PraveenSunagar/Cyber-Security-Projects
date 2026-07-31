@@ -1,1 +1,226 @@
+import re
+import hashlib
+from pathlib import Path
 
+INPUT_FILE = "input.txt"
+REPORT_FILE = "ioc_report.txt"
+
+
+# -----------------------------
+# IOC Extraction Functions
+# -----------------------------
+
+def extract_ips(text):
+    pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
+    return sorted(set(re.findall(pattern, text)))
+
+
+def extract_domains(text):
+    pattern = r'\b(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\b'
+    domains = re.findall(pattern, text)
+
+    # Remove domains that are actually part of URLs
+    return sorted(set(domains))
+
+
+def extract_urls(text):
+    pattern = r'https?://[^\s<>"\']+'
+    return sorted(set(re.findall(pattern, text)))
+
+
+def extract_sha256(text):
+    pattern = r'\b[a-fA-F0-9]{64}\b'
+    return sorted(set(re.findall(pattern, text)))
+
+
+# -----------------------------
+# Basic IP Validation
+# -----------------------------
+
+def is_valid_ip(ip):
+    parts = ip.split(".")
+
+    if len(parts) != 4:
+        return False
+
+    for part in parts:
+        if not part.isdigit():
+            return False
+
+        number = int(part)
+
+        if number < 0 or number > 255:
+            return False
+
+    return True
+
+
+# -----------------------------
+# Analyze IOC
+# -----------------------------
+
+def analyze_ioc(ip_list, domains, urls, hashes):
+
+    suspicious_ips = []
+
+    for ip in ip_list:
+        if not is_valid_ip(ip):
+            continue
+
+        # Private IP detection
+        first = int(ip.split(".")[0])
+
+        if (
+            ip.startswith("10.")
+            or ip.startswith("192.168.")
+            or ip.startswith("172.")
+        ):
+            continue
+
+        suspicious_ips.append(ip)
+
+    suspicious_domains = []
+
+    suspicious_words = [
+        "login",
+        "verify",
+        "secure",
+        "account",
+        "update",
+        "bank",
+        "password"
+    ]
+
+    for domain in domains:
+
+        domain_lower = domain.lower()
+
+        for word in suspicious_words:
+            if word in domain_lower:
+                suspicious_domains.append(domain)
+                break
+
+    return suspicious_ips, suspicious_domains
+
+
+# -----------------------------
+# Main Program
+# -----------------------------
+
+print("=" * 60)
+print("              IOC ANALYZER")
+print("=" * 60)
+
+if not Path(INPUT_FILE).exists():
+
+    print(f"\n❌ {INPUT_FILE} not found!")
+
+    print("\nCreate input.txt and add logs like:")
+    print("""
+Failed login from 45.33.32.156
+Visit https://secure-login-example.com
+Hash: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+""")
+
+    exit()
+
+
+# Read input file
+with open(INPUT_FILE, "r", encoding="utf-8") as file:
+    text = file.read()
+
+
+# Extract
+ips = extract_ips(text)
+domains = extract_domains(text)
+urls = extract_urls(text)
+hashes = extract_sha256(text)
+
+
+# Analyze
+suspicious_ips, suspicious_domains = analyze_ioc(
+    ips,
+    domains,
+    urls,
+    hashes
+)
+
+
+# -----------------------------
+# Display Report
+# -----------------------------
+
+print("\n========== IOC REPORT ==========\n")
+
+print(f"IP Addresses : {len(ips)}")
+
+for ip in ips:
+    print("  -", ip)
+
+print(f"\nDomains : {len(domains)}")
+
+for domain in domains:
+    print("  -", domain)
+
+print(f"\nURLs : {len(urls)}")
+
+for url in urls:
+    print("  -", url)
+
+print(f"\nSHA256 Hashes : {len(hashes)}")
+
+for sha256 in hashes:
+    print("  -", sha256)
+
+
+print("\n========== SUSPICIOUS IOC ==========\n")
+
+print("Suspicious IPs:")
+
+for ip in suspicious_ips:
+    print("  🚨", ip)
+
+print("\nSuspicious Domains:")
+
+for domain in suspicious_domains:
+    print("  🚨", domain)
+
+
+# -----------------------------
+# Save Report
+# -----------------------------
+
+with open(REPORT_FILE, "w", encoding="utf-8") as report:
+
+    report.write("IOC ANALYZER REPORT\n")
+    report.write("===================\n\n")
+
+    report.write("IP ADDRESSES\n")
+    for ip in ips:
+        report.write(f"{ip}\n")
+
+    report.write("\nDOMAINS\n")
+    for domain in domains:
+        report.write(f"{domain}\n")
+
+    report.write("\nURLS\n")
+    for url in urls:
+        report.write(f"{url}\n")
+
+    report.write("\nSHA256 HASHES\n")
+    for sha256 in hashes:
+        report.write(f"{sha256}\n")
+
+    report.write("\nSUSPICIOUS IPs\n")
+    for ip in suspicious_ips:
+        report.write(f"{ip}\n")
+
+    report.write("\nSUSPICIOUS DOMAINS\n")
+    for domain in suspicious_domains:
+        report.write(f"{domain}\n")
+
+
+print("\n================================")
+print("✅ Analysis Completed")
+print(f"📄 Report saved: {REPORT_FILE}")
+print("================================")
