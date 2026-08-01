@@ -6,7 +6,6 @@ INPUT_FILE = "input.txt"
 REPORT_FILE = "ioc_report.txt"
 
 
-# -----------------------------
 # IOC Extraction Functions
 
 
