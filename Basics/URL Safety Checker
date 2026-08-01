@@ -7,7 +7,6 @@ print("=" * 50)
 
 url = input("Enter URL: ").strip()
 
-# Add https:// if 
 if not url.startswith(("http://", "https://")):
     url = "https://" + url
 
