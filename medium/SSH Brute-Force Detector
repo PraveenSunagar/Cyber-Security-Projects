@@ -1,1 +1,115 @@
+import re
+from collections import Counter
 
+LOG_FILE = "auth.log"
+
+# Alert threshold
+HIGH_THRESHOLD = 5
+MEDIUM_THRESHOLD = 3
+
+failed_ips = []
+
+
+# -----------------------------
+# Read Log File
+# -----------------------------
+
+try:
+    with open(LOG_FILE, "r", encoding="utf-8") as file:
+        lines = file.readlines()
+
+except FileNotFoundError:
+    print("❌ auth.log file not found!")
+    print("Create auth.log and add SSH login logs.")
+    exit()
+
+
+# -----------------------------
+# Detect SSH Failed Logins
+# -----------------------------
+
+for line in lines:
+
+    # Check for SSH failed authentication
+    if (
+        "Failed password" in line
+        or "Failed login" in line
+        or "authentication failure" in line
+    ):
+
+        # Extract IPv4 address
+        match = re.search(
+            r'\b(?:\d{1,3}\.){3}\d{1,3}\b',
+            line
+        )
+
+        if match:
+            ip = match.group()
+            failed_ips.append(ip)
+
+
+# -----------------------------
+# Count IP Attempts
+# -----------------------------
+
+ip_counts = Counter(failed_ips)
+
+
+# -----------------------------
+# Display Report
+# -----------------------------
+
+print("=" * 60)
+print("          SSH BRUTE-FORCE DETECTOR")
+print("=" * 60)
+
+print(f"\nTotal Failed SSH Attempts: {len(failed_ips)}")
+
+print("\nIP ATTEMPT REPORT")
+print("-" * 45)
+
+if not ip_counts:
+    print("No failed SSH login attempts found.")
+
+else:
+
+    for ip, count in ip_counts.most_common():
+        print(f"{ip:<20} {count} attempts")
+
+
+# -----------------------------
+# Security Alerts
+# -----------------------------
+
+print("\n========== SECURITY ALERTS ==========")
+
+alert_found = False
+
+for ip, count in ip_counts.items():
+
+    if count >= HIGH_THRESHOLD:
+
+        print("\n🚨 HIGH SEVERITY")
+        print(f"Source IP : {ip}")
+        print(f"Attempts  : {count}")
+        print("Threat    : Possible SSH Brute Force")
+
+        alert_found = True
+
+    elif count >= MEDIUM_THRESHOLD:
+
+        print("\n⚠️ MEDIUM SEVERITY")
+        print(f"Source IP : {ip}")
+        print(f"Attempts  : {count}")
+        print("Threat    : Repeated SSH Login Failures")
+
+        alert_found = True
+
+
+if not alert_found:
+    print("✅ No suspicious SSH activity detected.")
+
+
+print("\n" + "=" * 60)
+print("Scan Completed")
+print("=" * 60)
