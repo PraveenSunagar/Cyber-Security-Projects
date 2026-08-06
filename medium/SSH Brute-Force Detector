@@ -18,9 +18,6 @@ except FileNotFoundError:
     print("Create auth.log and add SSH login logs.")
     exit()
 
-# Detect SSH Failed Logins
-# -----------------------------
-
 for line in lines:
 
     # Check for SSH failed authentication
