@@ -37,10 +37,6 @@ for line in lines:
             failed_ips.append(ip)
 
 
-# -----------------------------
-# Count IP Attempts
-# -----------------------------
-
 ip_counts = Counter(failed_ips)
 
 
