@@ -20,7 +20,6 @@ except FileNotFoundError:
 
 for line in lines:
 
-    # Check for SSH failed authentication
     if (
         "Failed password" in line
         or "Failed login" in line
