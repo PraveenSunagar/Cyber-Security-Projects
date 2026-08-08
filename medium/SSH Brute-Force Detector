@@ -39,9 +39,6 @@ for line in lines:
 
 ip_counts = Counter(failed_ips)
 
-
-# -----------------------------
-
 print("=" * 60)
 print("          SSH BRUTE-FORCE DETECTOR")
 print("=" * 60)
