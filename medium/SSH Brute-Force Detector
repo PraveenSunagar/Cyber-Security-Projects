@@ -41,8 +41,6 @@ ip_counts = Counter(failed_ips)
 
 
 # -----------------------------
-# Display Report
-# -----------------------------
 
 print("=" * 60)
 print("          SSH BRUTE-FORCE DETECTOR")
