@@ -56,9 +56,6 @@ else:
     for ip, count in ip_counts.most_common():
         print(f"{ip:<20} {count} attempts")
 
-
-# -----------------------------
-
 print("\n========== SECURITY ALERTS ==========")
 
 alert_found = False
