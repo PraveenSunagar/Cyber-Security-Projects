@@ -14,7 +14,7 @@ def extract_domains(text):
     pattern = r'\b(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\b'
     domains = re.findall(pattern, text)
 
-    # Remove domains that are actually part of URLs
+    # domains that are actually part of URLs
     return sorted(set(domains))
 
 
