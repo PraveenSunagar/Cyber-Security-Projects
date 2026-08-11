@@ -27,7 +27,6 @@ def extract_sha256(text):
     return sorted(set(re.findall(pattern, text)))
 
 
-# -----------------------------
 # Basic IP Validation
 # -----------------------------
 
