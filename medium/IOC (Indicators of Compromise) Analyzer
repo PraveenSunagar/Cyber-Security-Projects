@@ -26,10 +26,6 @@ def extract_sha256(text):
     pattern = r'\b[a-fA-F0-9]{64}\b'
     return sorted(set(re.findall(pattern, text)))
 
-
-# Basic IP Validation
-# -----------------------------
-
 def is_valid_ip(ip):
     parts = ip.split(".")
 
