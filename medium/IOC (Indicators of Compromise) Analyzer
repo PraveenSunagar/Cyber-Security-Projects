@@ -86,10 +86,6 @@ def analyze_ioc(ip_list, domains, urls, hashes):
 
     return suspicious_ips, suspicious_domains
 
-
-
-# -----------------------------
-
 print("=" * 60)
 print("              IOC ANALYZER")
 print("=" * 60)
