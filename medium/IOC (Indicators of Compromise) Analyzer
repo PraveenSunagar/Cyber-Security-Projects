@@ -123,10 +123,6 @@ suspicious_ips, suspicious_domains = analyze_ioc(
     urls,
     hashes
 )
-
-
-# -----------------------------
-# Display Report
 # -----------------------------
 
 print("\n========== IOC REPORT ==========\n")
