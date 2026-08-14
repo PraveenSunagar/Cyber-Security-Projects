@@ -162,8 +162,6 @@ for domain in suspicious_domains:
 
 
 # -----------------------------
-# Save Report
-# -----------------------------
 
 with open(REPORT_FILE, "w", encoding="utf-8") as report:
 
