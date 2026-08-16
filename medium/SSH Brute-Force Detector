@@ -3,7 +3,6 @@ from collections import Counter
 
 LOG_FILE = "auth.log"
 
-# Alert threshold
 HIGH_THRESHOLD = 5
 MEDIUM_THRESHOLD = 3
 
