@@ -107,7 +107,7 @@ with open(INPUT_FILE, "r", encoding="utf-8") as file:
     text = file.read()
 
 
-# Extract
+
 ips = extract_ips(text)
 domains = extract_domains(text)
 urls = extract_urls(text)
