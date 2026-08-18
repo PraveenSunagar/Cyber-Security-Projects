@@ -113,8 +113,6 @@ domains = extract_domains(text)
 urls = extract_urls(text)
 hashes = extract_sha256(text)
 
-
-# Analyze
 suspicious_ips, suspicious_domains = analyze_ioc(
     ips,
     domains,
