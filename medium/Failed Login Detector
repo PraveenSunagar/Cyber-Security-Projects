@@ -65,7 +65,7 @@ for user, count in user_counts.most_common():
     print(f"{user:<20} {count} attempts")
 
 
-# Detect possible
+
 print("\n========== SECURITY ALERTS ==========")
 
 found_alert = False
