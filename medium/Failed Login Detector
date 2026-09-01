@@ -40,7 +40,6 @@ for line in lines:
             failed_users.append(user_match.group(1))
 
 
-# Count 
 ip_counts = Counter(failed_ips)
 user_counts = Counter(failed_users)
 
