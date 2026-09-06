@@ -1,1 +1,81 @@
-
+hard/
+└── SentinelX/
+    ├── backend/
+    │   ├── __init__.py
+    │   ├── main.py
+    │   ├── config.py
+    │   ├── database.py
+    │   ├── models.py
+    │   ├── schemas.py
+    │   ├── api/
+    │   │   ├── __init__.py
+    │   │   ├── events.py
+    │   │   ├── alerts.py
+    │   │   └── incidents.py
+    │   └── services/
+    │       ├── __init__.py
+    │       ├── correlation.py
+    │       ├── risk.py
+    │       └── timeline.py
+    │
+    ├── detector/
+    │   ├── __init__.py
+    │   ├── engine.py
+    │   ├── rules.py
+    │   └── mitre.py
+    │
+    ├── ml/
+    │   ├── __init__.py
+    │   ├── anomaly.py
+    │   ├── features.py
+    │   └── train.py
+    │
+    ├── threat_intel/
+    │   ├── __init__.py
+    │   ├── scorer.py
+    │   ├── ioc.py
+    │   └── reputation.py
+    │
+    ├── collectors/
+    │   ├── __init__.py
+    │   ├── syslog.py
+    │   ├── suricata.py
+    │   ├── zeek.py
+    │   └── windows.py
+    │
+    ├── ai_analyst/
+    │   ├── __init__.py
+    │   ├── analyst.py
+    │   ├── prompts.py
+    │   └── rag.py
+    │
+    ├── response/
+    │   ├── __init__.py
+    │   ├── actions.py
+    │   └── playbooks.py
+    │
+    ├── frontend/
+    │   ├── package.json
+    │   ├── src/
+    │   │   ├── App.tsx
+    │   │   ├── main.tsx
+    │   │   ├── api.ts
+    │   │   ├── components/
+    │   │   └── pages/
+    │   └── index.html
+    │
+    ├── tests/
+    │   ├── test_detection.py
+    │   ├── test_risk.py
+    │   └── test_api.py
+    │
+    ├── docker/
+    │   ├── Dockerfile.backend
+    │   └── Dockerfile.frontend
+    │
+    ├── docker-compose.yml
+    ├── requirements.txt
+    ├── .env.example
+    ├── .gitignore
+    ├── LICENSE
+    └── README.md
