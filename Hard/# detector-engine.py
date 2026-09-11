@@ -1,5 +1,3 @@
-# detector/engine.py
-
 from dataclasses import dataclass
 
 
