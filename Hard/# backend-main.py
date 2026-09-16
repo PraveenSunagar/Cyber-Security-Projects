@@ -1,4 +1,4 @@
-# backend/main.py
+
 
 from fastapi import FastAPI
 from backend.api.events import router as events_router
