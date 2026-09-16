@@ -1,5 +1,3 @@
-
-
 from fastapi import FastAPI
 from backend.api.events import router as events_router
 from backend.api.alerts import router as alerts_router
