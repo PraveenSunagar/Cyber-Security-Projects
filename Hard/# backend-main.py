@@ -12,7 +12,6 @@ app.include_router(events_router, prefix="/api/events", tags=["Events"])
 app.include_router(alerts_router, prefix="/api/alerts", tags=["Alerts"])
 app.include_router(incidents_router, prefix="/api/incidents", tags=["Incidents"])
 
-
 @app.get("/")
 def root():
     return {
