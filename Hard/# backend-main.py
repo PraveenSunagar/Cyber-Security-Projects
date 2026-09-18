@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from backend.api.events import router as events_router
 from backend.api.alerts import router as alerts_router
 from backend.api.incidents import router as incidents_router
-
 app = FastAPI(
     title="SentinelX",
     version="1.0.0",
