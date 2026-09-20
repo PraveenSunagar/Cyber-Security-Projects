@@ -1,5 +1,4 @@
-# threat_intel/scorer.py
-
+# threat_
 class RiskScorer:
 
     def calculate(self, detections):
