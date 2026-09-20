@@ -1,4 +1,4 @@
-# threat_
+
 class RiskScorer:
 
     def calculate(self, detections):
