@@ -1,4 +1,3 @@
-# backend/
 from pydantic import BaseModel
 
 
