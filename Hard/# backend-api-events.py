@@ -1,4 +1,4 @@
-# backend/api/events.py
+# backend/api/
 
 from fastapi import APIRouter
 
