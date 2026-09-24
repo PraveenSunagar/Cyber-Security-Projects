@@ -1,5 +1,3 @@
-# backend/api/
-
 from fastapi import APIRouter
 
 from backend.schemas import SecurityEvent
