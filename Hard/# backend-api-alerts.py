@@ -1,5 +1,3 @@
-# backend/api/alerts.py
-
 from fastapi import APIRouter
 
 router = APIRouter()
