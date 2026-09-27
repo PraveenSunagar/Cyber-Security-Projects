@@ -1,4 +1,4 @@
-# ai_analyst/analyst.py
+# ai_analyst/
 
 class SOCAnalyst:
 
