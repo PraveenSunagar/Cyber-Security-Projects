@@ -1,5 +1,3 @@
-# ai_analyst/
-
 class SOCAnalyst:
 
     def analyze(self, event, detections, risk):
