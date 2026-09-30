@@ -1,5 +1,3 @@
-# response/
-
 class ResponseEngine:
 
     def block_ip(self, ip: str):
