@@ -2,7 +2,6 @@ class ResponseEngine:
 
     def block_ip(self, ip: str):
 
-        # Lab-safe placeholder.
         # Connect this only to infrastructure you control.
 
         return {
