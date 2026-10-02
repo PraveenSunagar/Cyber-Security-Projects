@@ -1,9 +1,6 @@
 class ResponseEngine:
 
     def block_ip(self, ip: str):
-
-        # Connect this only to infrastructure you control.
-
         return {
             "action": "block_ip",
             "target": ip,
