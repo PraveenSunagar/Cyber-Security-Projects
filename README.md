@@ -4,7 +4,6 @@
 A hands-on cybersecurity project repository focused on **ethical hacking, penetration testing, network security, web application security, cryptography, digital forensics, security automation, and defensive security**.
 
 This repository contains practical projects ranging from **basic security concepts to intermediate and advanced cybersecurity tools**. Each project is designed to improve practical security skills through implementation, testing, and documentation.
-
 > ⚠️ **Disclaimer:** All projects in this repository are created for educational purposes and authorized security testing only. Do not use these tools against systems, networks, or applications without explicit permission.
 
 ---
