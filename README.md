@@ -292,7 +292,6 @@ Recommended platforms for practicing the concepts in this repository:
 ---
 
 # ⭐ Goals
-
 This repository is continuously evolving toward a complete cybersecurity portfolio covering:
 
 ```text
