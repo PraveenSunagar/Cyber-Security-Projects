@@ -30,7 +30,6 @@ Cyber-Security-Projects/
 ---
 
 # 📚 Project Levels
-
 ## 🟢 Basics
 
 Projects designed to build fundamental cybersecurity and programming skills.
