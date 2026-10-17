@@ -9,7 +9,6 @@ This repository contains practical projects ranging from **basic security concep
 ---
 
 ## 🚀 Repository Structure
-
 ```text
 Cyber-Security-Projects/
 │
