@@ -7,7 +7,6 @@ This repository contains practical projects ranging from **basic security concep
 > ⚠️ **Disclaimer:** All projects in this repository are created for educational purposes and authorized security testing only. Do not use these tools against systems, networks, or applications without explicit permission.
 
 ---
-
 ## 🚀 Repository Structure
 ```text
 Cyber-Security-Projects/
