@@ -34,7 +34,6 @@ Cyber-Security-Projects/
 Projects designed to build fundamental cybersecurity and programming skills.
 
 ### Topics
-
 * 🔍 Information Gathering
 * 🌐 Networking Fundamentals
 * 🔐 Cryptography
