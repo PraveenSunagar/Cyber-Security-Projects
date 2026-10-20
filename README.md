@@ -93,7 +93,6 @@ Advanced projects focused on building realistic cybersecurity systems and securi
 * JavaScript
 * Bash
 * SQL
-
 ### Cybersecurity Tools
 
 * Nmap
