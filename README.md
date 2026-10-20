@@ -105,7 +105,6 @@ Advanced projects focused on building realistic cybersecurity systems and securi
 * Ghidra
 * John the Ripper
 * Hashcat
-
 ### Security Platforms
 
 * Kali Linux
