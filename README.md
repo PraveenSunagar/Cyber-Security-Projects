@@ -94,7 +94,6 @@ Advanced projects focused on building realistic cybersecurity systems and securi
 * Bash
 * SQL
 ### Cybersecurity Tools
-
 * Nmap
 * Burp Suite
 * Wireshark
