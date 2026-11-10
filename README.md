@@ -45,7 +45,6 @@ Projects designed to build fundamental cybersecurity and programming skills.
 ---
 
 ## 🟡 Medium
-
 Intermediate projects that combine multiple cybersecurity concepts and real-world security techniques.
 
 ### Topics
