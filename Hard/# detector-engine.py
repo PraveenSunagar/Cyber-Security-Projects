@@ -10,7 +10,6 @@ class Detection:
     description: str
     mitre: str
 
-
 class DetectionEngine:
 
     def analyze(self, event: dict) -> list[Detection]:
